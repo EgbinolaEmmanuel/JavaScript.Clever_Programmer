@@ -1,92 +1,119 @@
-//Inventory Setup:
+//Create an inventory store that 
+//Display One's Product; Add One's Product to the recent Ones; Ordering Product
 
-//Create an array to store product objects in your inventory.
-//Each product object should have properties like id, name, price, and quantity.
-//Display Inventory:
-
-//Implement a function to display all the products in your inventory with their details.
-//Calculate Total Value:
-
-//Implement a function to calculate the total value of a specific product based on its price and quantity.//
-
-let readline = require('readline-sync')
+readline = require('readline-sync') // Input Authentication.
 
 Products = [
-    Smartphones = { id: 101, name : 'infinix', price: 85000, quantity: 56},
-    Laptops = {id: 102, name: 'dell', price: 150000, quantity: 74 },
-    Tshirts = {id: 103, name: 'gucci', price: 2700, quantity: 167}, 
-    Jeans = {id: 104, name: 'jwen', price: 8000, quantity: 240 }, 
-    Jackets = {id: 105, name: 'Tommy Hillfiger', price: 6500, quantity: 70}, 
-    Refrigerators = {id: 106, name: 'thermocool', price: 125000, quantity: 40}, 
-    Washing_Machines = {id: 107, name: 'gree', price: 750000, quantity: 167}, 
-    Microwaves = {id: 108, name: 'jwen', price: 8000, quantity: 240}, 
-    Soccer_Balls = {id: 109, name: 'jwen', price: 8000, quantity: 240},
-    Tennis_Rackets = {id: 110, name: 'jwen', price: 8000, quantity: 240}, 
-    Shampoo = {id: 111, name: 'jwen', price: 8000, quantity: 240},
-     Skincar_Products = {id: 112, name: 'jwen', price: 8000, quantity: 240}, 
-    Hairdryers = {id: 113, name: 'jwen', price: 8000, quantity: 240} // LATER ON, TRY HAVING TO 
+
+    Laptops = [{id: 101,name:'dell', price: 1500, quantity: 50},
+               {id: 102,name:'Apple', price: 2700, quantity: 50},
+               {id: 103,name:'HP', price: 1850, quantity: 50}],
+    Clothing = [{id: 201,name:'Tshirt', price: 25, quantity: 50},
+                {id: 202,name:'Jean', price: 47, quantity: 50},
+                {id: 203,name:'Round-Neck', price: 15, quantity: 50}],
+    Books_and_Media= [{id: 301,name:'DVD', price: 40, quantity: 50},
+                      {id: 302,name:'RDPD', price: 1500, quantity: 50, author: 'robert kiyosaki'},
+                      {id: 303,name:'Music CD\'s', price: 1500, quantity: 50}]
+
 ]
 
+ProductName = ['Laptops', 'Clothing', 'Books_and_Media']
 
-let displayProducts = () => {
-
-    for (product of Products) {
-        console.log(product.name, '======', product.price)
+function exit1() {
+  console.log('To Re-Display Product:\t Press redisplay')
+  console.log('Back to main menu:\t Press main_menu' )
+  console.log('Exit Inventory Application:\t Press Exit\n\n\n')
+  
+  input = readline.question('Input Option >>>')
+  if (input == 'redisplay' || input == 'REDISPLAY') {
+     //Displaying product name; price and quantity again, if wanted by users.
+     for (product of Products) {
+      console.log(product,' ', ':\n\n');
+      for (property in product) {
+        console.log( 'PRODUCT NAME:\t', property.name, '\t\tPrice:\t', property.price, '\t\tQuantity:\t', property.quantity)
+      }
+     }
+  } else if (input == 'exit' || input == 'EXIT' ) {
+    //break;
     }
-    
 }
 
-console.log('\n\n\nWelcome to our Inventory Store\n')
-console.log('These is where we list all of your product in our store\n\n')
+
+
+//program Starting.
+console.log('Welcome to Our Inventory Store')
 
 while (true) {
 
+   
 
- console.log('INVENTORY FEATURES:\n\n')
+   console.log('\n\nDASHBOARD:\n')
 
- console.log('1.) Display Inventory >>>      2.) Add Inventory Product >>>      3.) Taking an Order via your I_product >>>      ')
- console.log('4.) Calculating Product Value >>>      5.) Product Filtering >>>    6.)  Product Update >>>      ')
-
-
- let OptFeat = readline.question('Input Option >>>')
-
- if (OptFeat == '1') {
-    console.log('\n\n\n')
-    for (product of Products) {
-        console.log(product.name + '   ======   ' + product.price + '\n\n\n');
+   console.log('\tPRODUCTS :')
+   for (product of ProductName){
+    console.log('\t\t',product)
     }
 
-    console.log('Exit The Inventory System  == type YES ')
-    console.log('Back to Main Menu == type main_menu')
-    console.log('Re - Display Inventory System == type redisplay')
+   console.log('\nTotal:', ProductName.length,' ', 'Products\n')
+   
+   console.log('1.) Display Product >>>     2.) Product Adding >>>     3.) Product ordering >>>\n\n')
+   let input = readline.question('Input Option Number >>>')
 
-    OptFeat = readline.question('Input End Option >>>');
+   
+   if (input == '1') {  //Displaying Product.
+      let productCounter = 0;  //Will be used to navigate each inventory product in order for its display.
+      let productAmount = Products.length;
 
-
-    if (OptFeat == 'yes' || OptFeat == 'Yes') {
-        break;
-    } else if (OptFeat == 'redisplay') {
-        for (int = 0; 10 > int; int++) {
-
-         for (product of Products) {
-          console.log(product.name + '   ======   ' + product.price);
-         };
-        
-         OptFeat= readline.question('Back to menu (Yes/No) >> ')
-
-         if (OptFeat == 'Yes' || OptFeat == 'yes') {
-            break; 
+      for (let name of ProductName) { //used to iterate each value in ProductName. for the each product data to be displayed.
+      
+        counter = 0;
+        console.log(name, ':', '\n')  // Calling Product Namw
+        while (productAmount > counter) {   // will be used to loop through every of the inventory product data for displaying.
+          console.log('\n\nProduct Name:\t',Products[productCounter][counter].name, '\t\tPrice\t:', Products[productCounter][counter].price, '\t\tquantity\t:', Products[productCounter][counter].quantity)
+          counter += 1;
         }
+      
+        productCounter += 1;
+      }
+
+      
+      //exit
+        console.log('To Re-Display Product:\t Press redisplay')
+        console.log('Back to main menu:\t Press main_menu' )
+        console.log('Exit Inventory Application:\t Press Exit\n\n\n')
+      
+        input = readline.question('Input Option >>>')
+        if (input == 'redisplay' || input == 'REDISPLAY') {
+
+         //Displaying product name; price and quantity again, if wanted by users.
+         let productCounter = 0;  //Will be used to navigate each inventory product in order for its display.
+         let productAmount = Products.length;
+
+         for (let name of ProductName) { //used to iterate each value in ProductName. for the each product data to be displayed.
+      
+          counter = 0;
+          console.log(name, ':', '\n')  // Calling Product Namw
+          while (productAmount > counter) {   // will be used to loop through every of the inventory product data for displaying.
+          console.log('\nProduct Name:\t',Products[productCounter][counter].name, '\t\tPrice\t:', Products[productCounter][counter].price, '\t\tquantity\t:', Products[productCounter][counter].quantity, '\n\n')
+          counter += 1;
+          }
+      
+          productCounter += 1;
+         }
+        } else if (input == 'exit' || input == 'EXIT' ) {
+        break;
+          } //exit function
+     
+   }else if(input == '2') {
+
+      console.log('We will get back to you as always')
+
     }
-    //Night Task : 
-    //    Work on Option 2: 
- } else if(OptFeat == '2') {
-    //Calculating total value.
 
- }
+
+
+
+
+
 
 }
-}
-
-console.log('\n\n\nThanks for reaching out to us');
-
